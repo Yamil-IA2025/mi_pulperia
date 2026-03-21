@@ -1,0 +1,49 @@
+name: mi_pulperia
+description: Control de inventario, ventas y fiados para pulperías
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Base de datos local (Drift) - PARA WEB Y MÓVIL
+  drift: ^2.28.0
+  drift_dev: ^2.28.0
+  
+  # Backend (Supabase)
+  supabase_flutter: ^2.8.0
+  
+  # Estado
+  flutter_riverpod: ^2.6.1
+  
+  # UI utilities
+  intl: ^0.19.0
+  fl_chart: ^0.70.0
+  shimmer: ^3.0.0
+  
+  # Funcionalidades
+  mobile_scanner: ^3.5.7
+  connectivity_plus: ^6.1.0
+  
+  # Utilidades
+  uuid: ^4.5.1
+  json_annotation: ^4.9.0
+  freezed_annotation: ^2.4.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  
+  # Generadores
+  build_runner: ^2.4.13
+  json_serializable: ^6.9.0
+  freezed: ^2.5.7
+
+flutter:
+  uses-material-design: true

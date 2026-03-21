@@ -1,0 +1,52 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # Permite ejecutar manualmente desde GitHub
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Checkout del código
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      # 2. Configurar Java 17 (requerido por Flutter)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      
+      # 3. Configurar Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+          cache: true
+      
+      # 4. Obtener dependencias
+      - name: Get dependencies
+        run: flutter pub get
+      
+      # 5. Verificar formato (opcional, quita si da problemas)
+      - name: Analyze code
+        run: flutter analyze || true
+      
+      # 6. Compilar APK release
+      - name: Build APK
+        run: flutter build apk --release
+      
+      # 7. Subir APK como artefacto
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: mi_pulperia-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 5
