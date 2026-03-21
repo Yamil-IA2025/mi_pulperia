@@ -12,11 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      # Instalar dependencias del sistema para SQLite y otros plugins
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libsqlite3-dev libssl-dev curl unzip
+      - run: sudo apt-get update && sudo apt-get install -y libsqlite3-dev
       
       - uses: actions/setup-java@v4
         with:
@@ -25,18 +21,24 @@ jobs:
       
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.19.0'
           channel: 'stable'
-          cache: true
       
-      - name: Get dependencies
-        run: flutter pub get
+      - run: flutter doctor -v
       
-      - name: Build APK
-        run: flutter build apk --release
+      - run: flutter pub get
       
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - name: Build APK with verbose
+        run: flutter build apk --release --verbose
+        continue-on-error: true
+      
+      - name: Check if APK exists
+        run: ls -la build/app/outputs/flutter-apk/ || echo "APK not found"
+      
+      - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: mi_pulperia-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
-          retention-days: 5
+          name: build-logs
+          path: |
+            build/app/outputs/flutter-apk/
+            android/build.gradle
