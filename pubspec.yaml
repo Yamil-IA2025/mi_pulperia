@@ -11,11 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
   
-  # Base de datos local (Drift)
-  drift: ^2.28.0
+  # Base de datos local (Drift) - COMENTADO PARA PRUEBA
+  # drift: ^2.28.0
+  # drift_dev: ^2.28.0
   
-  # Backend (Supabase)
-  supabase_flutter: ^2.8.0
+  # Backend (Supabase) - COMENTADO PARA PRUEBA
+  # supabase_flutter: ^2.8.0
   
   # Estado
   flutter_riverpod: ^2.6.1
@@ -39,8 +40,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
   
-  # Generadores (solo para desarrollo)
-  drift_dev: ^2.28.0          # <-- MOVIDO AQUÍ
+  # Generadores
   build_runner: ^2.4.13
   json_serializable: ^6.9.0
   freezed: ^2.5.7
