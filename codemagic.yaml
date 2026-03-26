@@ -2,16 +2,14 @@ workflows:
   default-workflow:
     name: Default Workflow
     scripts:
-      - name: Clean and setup
+      - name: Setup
         script: |
           flutter clean
-          rm -f pubspec.lock
-          rm -f lib/database/database.g.dart
           flutter pub get
-          flutter pub run build_runner build --delete-conflicting-outputs
+          # SIN build_runner - el archivo ya está en git
+          
       - name: Build Android
         script: flutter build apk --release
-      - name: Build iOS
-        script: flutter build ios --release --no-codesign
+        
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
