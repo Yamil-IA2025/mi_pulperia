@@ -5,8 +5,8 @@ workflows:
       - name: Setup
         script: |
           flutter clean
+          rm -f pubspec.lock
           flutter pub get
-          # SIN build_runner - el archivo ya está en git
           
       - name: Build Android
         script: flutter build apk --release
