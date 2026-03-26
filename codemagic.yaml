@@ -2,10 +2,12 @@ workflows:
   default-workflow:
     name: Default Workflow
     scripts:
-      - name: Setup
+      - name: Clean everything
         script: |
           flutter clean
           rm -f pubspec.lock
+          rm -rf ~/.pub-cache
+          flutter pub cache repair
           flutter pub get
           
       - name: Build Android
